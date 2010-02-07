@@ -15,4 +15,12 @@ describe User do
       }.should change{@user.reload.score}.from(0).to(0.983833718244804)
     end
   end
+  
+  
+  describe "code_path" do
+    it "should return relative path to user's code" do
+      @user = Factory(:user)
+      @user.code_path.should == "public/code/#{@user.nick}"
+    end
+  end
 end

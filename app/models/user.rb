@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
     end
   end
   
+  def code_path
+    "public/code/#{nick}"
+  end
+  
   
   private
   def game_stats_changed?
