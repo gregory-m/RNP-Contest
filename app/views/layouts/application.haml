@@ -5,7 +5,6 @@
     %title RNP Contest ❖ Home
     %link{ :rel => 'shortcut icon', :href => '/images/rnp.ico', :type => 'image/x-icon' }
     = stylesheet_link_tag 'application'
-    = javascript_include_tag 'application'
   %body
     #dark-side
       = link_to "<h1>Ruby NoName Podcat's <strong>Contest</strong></h1>", page_path('home')
@@ -15,6 +14,7 @@
         %li= link_to_unless_current '<span>Участие</span>', new_user_path
         %li= link_to_unless_current '<span>Про post-hook</span>', page_path('hook')
         %li= link_to_unless_current '<span>Правила</span>', page_path('rules')
+        %li= link_to_unless_current '<span>FAQ</span>', page_path('faq')
         %li= link_to_unless_current '<span>Приз</span>', page_path('yummy')
         %li= link_to_unless_current '<span>Подкаст</span>', 'http://ruby.rpod.ru'
     #content
