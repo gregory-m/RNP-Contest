@@ -19,7 +19,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     respond_to do |format|
-      format.html # show.html.erb
+      if @user.active?
+        format.html # show.html.erb
+      else
+        format.html { render :action => "not_active" }
+      end
     end
   end
   

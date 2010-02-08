@@ -74,7 +74,7 @@ describe UsersController do
   
   describe "GET /users/1 (show)" do
     before(:each) do
-      User.stub(:find).and_return(@user = stub_model(User))
+      User.stub(:find).and_return(@user = stub_model(User, :active? => true))
     end
     
     it "should find user" do
@@ -85,6 +85,12 @@ describe UsersController do
     it "should render show action" do
       do_request
       response.should render_template("show")
+    end
+    
+    it "should render not_active action for not active user" do
+      @user.stub!(:active?).and_return(false)
+      do_request
+      response.should render_template("not_active")
     end
     
     def do_request
