@@ -1,0 +1,9 @@
+%h2 Чемпионы
+
+%ul
+  - @users.each_with_index do |user, index|
+    %li(class="place place-#{index + 1}")
+      %a(href="#{user_path(user)}")
+        %span.place-num= index + 1
+        = user.nick
+      

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  is_gravtastic!
 
   def before_update
     if game_stats_changed?
