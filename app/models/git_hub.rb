@@ -4,7 +4,12 @@ class GitHub < Struct.new(:user)
     FileUtils.mkdir_p code_path
     
     Net::HTTP.start("github.com") { |http|
-      resp = http.get("/#{user.nick}/#{user.repo_name}/raw/master/MyTronBot.rb")
+      url = "/#{user.nick}/#{user.repo_name}/raw/master/MyTronBot.rb"
+      resp = http.get(url)
+      
+      unless resp.is_a?(Net::HTTPOK)
+        raise "Can't get user's code from #{url}"
+      end
       
       safe_code = make_code_safe(resp.body)
       
