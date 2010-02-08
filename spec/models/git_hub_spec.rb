@@ -7,7 +7,7 @@ describe GitHub do
       @user = Factory(:user, :repo_url => "git://github.com/gregory-m/TestRepo.git")
       
       stub_get("http://github.com/gregory-m/TestRepo/raw/master/MyTronBot.rb", "MyTronBot.rb")
-      File.stub!(:makedirs).and_return(true)
+      FileUtils.stub!(:mkdir_p).and_return(true)
       
       @stub_file = stub("file", :write => true)
       File.stub!(:open).and_yield(@stub_file)

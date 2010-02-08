@@ -1,7 +1,7 @@
 class GitHub < Struct.new(:user)
   
   def download_code  
-    File.makedirs code_path
+    FileUtils.mkdir_p code_path
     
     Net::HTTP.start("github.com") { |http|
       resp = http.get("/#{user.nick}/#{user.repo_name}/raw/master/MyTronBot.rb")
