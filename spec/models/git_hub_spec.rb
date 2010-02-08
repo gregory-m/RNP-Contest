@@ -4,7 +4,7 @@ require "ruby-debug"
 describe GitHub do
   describe "code download" do
     before(:each) do
-      @user = Factory(:user, :nick => 'gregory-m')
+      @user = Factory(:user, :repo_url => "git://github.com/gregory-m/TestRepo.git")
       
       stub_get("http://github.com/gregory-m/TestRepo/raw/master/MyTronBot.rb", "MyTronBot.rb")
       File.stub!(:makedirs).and_return(true)

@@ -1,8 +1,7 @@
 Factory.define :user do |u|
-  u.nick { Factory.next(:nick) }
-  u.repo_name "TestRepo"
+  u.repo_url { Factory.next(:url) }
 end
 
-Factory.sequence :nick do |n|
-   "cool-github-nick#{n}"
- end
+Factory.sequence :url do |n|
+  "git://github.com/cool-github-nick#{n}/RNP-Contest-Bot.git"
+end
