@@ -11,6 +11,7 @@
       = link_to "<h1>Ruby NoName Podcat's <strong>Contest</strong></h1>", page_path('home')
       %ul
         %li= link_to_unless_current '<span>Домой, к маме</span>', page_path('home')
+        %li= link_to_unless_current '<span>Результаты</span>', users_path
         %li= link_to_unless_current '<span>Участие</span>', new_user_path
         %li= link_to_unless_current '<span>Про post-hook</span>', page_path('hook')
         %li= link_to_unless_current '<span>Правила</span>', page_path('rules')

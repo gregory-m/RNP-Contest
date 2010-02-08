@@ -25,10 +25,10 @@ class User < ActiveRecord::Base
       self.nick  = $1
       self.repo_name = $2
       if User.find_by_nick self.nick
-        errors.add(:repo_url, "We alrady have this user in system")
+        errors.add(:repo_url, "Пользователь с таким ником уже зарегестрирован")
       end
     else
-      errors.add(:repo_url, "is not a guthub repository root")
+      errors.add(:repo_url, "Неверный URL")
     end
   end
   

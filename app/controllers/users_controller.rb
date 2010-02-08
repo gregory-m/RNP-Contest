@@ -8,10 +8,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-      else
+      unless @user.save
         format.html { render :action => "new" }     
+      else
+        format.html { }
       end
     end
   end

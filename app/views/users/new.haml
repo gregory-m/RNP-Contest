@@ -14,3 +14,5 @@
 - form_for :user, @user, :url => { :action => "create" } do |f|
   = f.text_field :repo_url, :class => 'url'
   = submit_tag 'Yarrr'
+  - if @user
+    %p.error= @user.errors[:repo_url]
