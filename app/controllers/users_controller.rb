@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  
+  protect_from_forgery :except => [:update]
+  
   def new
   end
   
@@ -18,6 +21,23 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
     end
+  end
+  
+  def update
+    user_nick = get_user_nick_from_json(params[:payload])
+    @user = User.find_by_nick user_nick
+    
+    if @user
+      GitHub.new(@user).download_code
+    end
+    
+    render :text => "OK"
+  end
+  
+  private
+  def get_user_nick_from_json(json)
+    push = JSON.parse(json)
+    push["repository"]["owner"]["name"]
   end
 
 end
