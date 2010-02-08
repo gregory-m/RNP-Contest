@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
         errors.add(:repo_url, "Пользователь с таким ником уже зарегестрирован")
       end
     else
-      errors.add(:repo_url, "Неверный URL")
+      errors.add(:repo_url, "Сами не знаем почему, но ваш URL нам не нравиться")
     end
   end
   
