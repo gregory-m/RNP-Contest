@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       unless @user.save
         format.html { render :action => "new" }     
       else
-        format.html { }
+        format.html { redirect_to(user_url(@user)) }
       end
     end
   end
