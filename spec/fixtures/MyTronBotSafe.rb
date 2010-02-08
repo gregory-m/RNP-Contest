@@ -1,5 +1,8 @@
-require File.join(File.dirname(__FILE__), "map.rb")
-require File.join(File.dirname(__FILE__), "printing.rb")
+require File.join(File.dirname(__FILE__), "../map.rb")
+require File.join(File.dirname(__FILE__), "../printing.rb")
+$SAFE = 3
+
+
 
 # MyTronBot
 # Author: <name>
