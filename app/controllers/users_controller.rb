@@ -34,6 +34,10 @@ class UsersController < ApplicationController
     render :text => "OK"
   end
   
+  def index
+    @users = User.all(:order => 'users.score DESC')   
+  end
+
   private
   def get_user_nick_from_json(json)
     push = JSON.parse(json)

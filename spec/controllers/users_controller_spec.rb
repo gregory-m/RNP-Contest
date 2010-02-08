@@ -102,24 +102,37 @@ describe UsersController do
   
     it "should find user by nick" do
       User.should_receive(:find_by_nick).with("gregory-m")
-      do_requset
+      do_request
     end
     
-    it "should download users code" do
+    it "should download user:s code" do
       GitHub.should_receive(:new).with(@user)
       @git_hub_stub.should_receive(:download_code)
-      do_requset
+      do_request
     end
     
     it "should not download code for not existing user" do
       User.stub!(:find_by_nick).and_return(nil)
       GitHub.should_not_receive(:new).with(@user)
       @git_hub_stub.should_not_receive(:download_code)
-      do_requset
+      do_request
     end
     
-    def do_requset
+    def do_request
       post :update, "payload"=>"{\"commits\":[{\"url\":\"http://github.com/gregory-m/RNP-Contest-Test-Bot/commit/bd798657cb67d89593c9f73e66f98cae03d8a928\",\"message\":\"Post-Receive hook test\",\"added\":[],\"removed\":[],\"modified\":[\"MyTronBot.rb\"],\"author\":{\"email\":\"man.gregory@gmail.com\",\"name\":\"Gregory Man\"},\"timestamp\":\"2010-02-08T09:01:12-08:00\",\"id\":\"bd798657cb67d89593c9f73e66f98cae03d8a928\"}],\"repository\":{\"description\":\"\",\"open_issues\":0,\"watchers\":1,\"url\":\"http://github.com/gregory-m/RNP-Contest-Test-Bot\",\"fork\":false,\"forks\":0,\"private\":false,\"homepage\":\"\",\"owner\":{\"email\":\"gregory@kaddabra.co.il\",\"name\":\"gregory-m\"},\"name\":\"RNP-Contest-Test-Bot\"},\"ref\":\"refs/heads/master\",\"before\":\"84827cbfc5eee0944d81c93047bb0d052a41d6e0\",\"after\":\"bd798657cb67d89593c9f73e66f98cae03d8a928\"}"
+    end
+  end
+
+  describe "Get /" do
+
+    it "should be successful" do
+      get :index
+      response.should be_success
+    end
+
+    it "should load all users" do
+      User.should_receive(:all).with(:order => 'users.score DESC')
+      get :index
     end
   end
 end
