@@ -28,6 +28,15 @@ describe GitHub do
       GitHub.new(@user).download_code
     end
     
+    it "should raise exeption if code not found" do
+      FakeWeb.register_uri(:get, "http://github.com/gregory-m/TestRepo/raw/master/MyTronBot.rb", 
+                                 :body => "Nothing to be found 'round here",
+                                 :status => ["404", "Not Found"])
+      lambda { 
+        GitHub.new(@user).download_code
+      }.should raise_error
+    end
+    
     it "should make user active" do
       User.destroy_all
       @user = Factory(:user, :repo_url => "git://github.com/gregory-m/TestRepo.git", :active => false)
