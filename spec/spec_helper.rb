@@ -21,6 +21,22 @@ Spec::Runner.configure do |config|
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 
+  FakeWeb.allow_net_connect = false
+  
+  def fixture_file(filename)
+    return '' if filename == ''
+    file_path = File.expand_path(File.dirname(__FILE__) + '/fixtures/' + filename)
+    File.read(file_path)
+  end
+  
+  def stub_post(url, filename)
+    FakeWeb.register_uri(:post, url, :body => fixture_file(filename))
+  end
+  
+  def stub_get(url, filename)
+    FakeWeb.register_uri(:get, url, :body => fixture_file(filename))
+  end
+  
   # == Fixtures
   #
   # You can declare fixtures for each example_group like this:
