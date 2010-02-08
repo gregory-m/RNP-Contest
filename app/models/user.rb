@@ -36,4 +36,8 @@ class User < ActiveRecord::Base
   def game_stats_changed?
     self.wins_changed? || self.losses_changed? || self.draws_changed? || self.games_played_changed?
   end
+  
+  def email
+    'kossnocorp@gmail.com'
+  end
 end

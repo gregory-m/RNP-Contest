@@ -5,5 +5,7 @@
     %li(class="place place-#{index + 1}")
       %a(href="#{user_path(user)}")
         %span.place-num= index + 1
+        = image_tag user.gravatar_url :size => (index == 0 ? 28 : ((index == 1 or index == 2) ? 24 : 16))
         = user.nick
-      
+        %span.info
+          Побед: #{user.wins}, поражений: #{user.losses}, ничьи: #{user.draws}
