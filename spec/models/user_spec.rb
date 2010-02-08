@@ -16,6 +16,13 @@ describe User do
       }.should change{@user.reload.score}.from(0).to(0.983833718244804)
     end
     
+    it "should add penlty to score if less then 20 games played" do
+      @user = Factory(:user)
+      lambda {
+        @user.update_attributes(:wins => 12, :losses => 0, :draws => 1, :games_played => 13)
+      }.should change{@user.reload.score}.from(0).to(0.192307692307692)
+    end
+    
     it "should not create user with same nick" do
       Factory(:user, :repo_url => "git://github.com/gregory-m/RNP-Contest-Bot.git")
       

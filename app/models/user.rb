@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   def before_update
     if game_stats_changed?
       self.score = (self.wins + 0.5 * self.draws) / self.games_played
+      self.score = self.score * 0.2 if self.games_played < 20
     end
   end
   
