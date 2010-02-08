@@ -4,5 +4,6 @@ db/*.sqlite3
 *.cache
 *.log
 *.pid
-
 public/code/**/*
+.DS_Store
+public/stylesheets/*
