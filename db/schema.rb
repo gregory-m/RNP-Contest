@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100208203056) do
+ActiveRecord::Schema.define(:version => 20100208205706) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20100208203056) do
     t.string   "repo_name"
     t.string   "repo_url"
     t.boolean  "active",          :default => false
+    t.string   "email"
   end
 
 end

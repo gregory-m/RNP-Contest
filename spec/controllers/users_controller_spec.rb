@@ -74,7 +74,7 @@ describe UsersController do
   
   describe "GET /users/1 (show)" do
     before(:each) do
-      User.stub(:find).and_return(@user = stub_model(User))
+      User.stub(:find).and_return(@user = stub_model(User, :active? => true))
     end
     
     it "should find user" do
@@ -87,6 +87,12 @@ describe UsersController do
       response.should render_template("show")
     end
     
+    it "should render not_active action for not active user" do
+      @user.stub!(:active?).and_return(false)
+      do_request
+      response.should render_template("not_active")
+    end
+    
     def do_request
       get :show, :id => 1
     end
@@ -94,7 +100,7 @@ describe UsersController do
   
   describe "update" do
     before(:each) do
-      User.stub!(:find_by_nick).and_return(@user = stub_model(User))
+      User.stub!(:find_by_nick).and_return(@user = stub_model(User, :email => 'testa@test.com'))
       
       @git_hub_stub = stub("GitHub stub", :download_code => true)
       GitHub.stub!(:new).and_return(@git_hub_stub)
@@ -105,7 +111,7 @@ describe UsersController do
       do_request
     end
     
-    it "should download user:s code" do
+    it "should download user's code" do
       GitHub.should_receive(:new).with(@user)
       @git_hub_stub.should_receive(:download_code)
       do_request
@@ -117,6 +123,21 @@ describe UsersController do
       @git_hub_stub.should_not_receive(:download_code)
       do_request
     end
+    
+    it "should not update email if user have one" do
+      @user.should_not_receive(:email=)
+      @user.should_not_receive(:save)
+      do_request
+    end
+
+    it "should update email if user don't have one" do
+      @user.stub!(:email).and_return(nil)
+      
+      @user.should_receive(:email=).with('gregory@kaddabra.co.il')
+      @user.should_receive(:save)
+      do_request
+    end
+
     
     def do_request
       post :update, "payload"=>"{\"commits\":[{\"url\":\"http://github.com/gregory-m/RNP-Contest-Test-Bot/commit/bd798657cb67d89593c9f73e66f98cae03d8a928\",\"message\":\"Post-Receive hook test\",\"added\":[],\"removed\":[],\"modified\":[\"MyTronBot.rb\"],\"author\":{\"email\":\"man.gregory@gmail.com\",\"name\":\"Gregory Man\"},\"timestamp\":\"2010-02-08T09:01:12-08:00\",\"id\":\"bd798657cb67d89593c9f73e66f98cae03d8a928\"}],\"repository\":{\"description\":\"\",\"open_issues\":0,\"watchers\":1,\"url\":\"http://github.com/gregory-m/RNP-Contest-Test-Bot\",\"fork\":false,\"forks\":0,\"private\":false,\"homepage\":\"\",\"owner\":{\"email\":\"gregory@kaddabra.co.il\",\"name\":\"gregory-m\"},\"name\":\"RNP-Contest-Test-Bot\"},\"ref\":\"refs/heads/master\",\"before\":\"84827cbfc5eee0944d81c93047bb0d052a41d6e0\",\"after\":\"bd798657cb67d89593c9f73e66f98cae03d8a928\"}"
