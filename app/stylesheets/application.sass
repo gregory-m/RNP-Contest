@@ -115,15 +115,29 @@ body
   ul
     li.place
       font-size: 20px
-      height: 30px
-      color: #4D4646
+      line-height: 20px
+      padding: 10px 0px
+      
+      &.place-1
+        font-size: 45px
+        line-height: 45px
+        
+      &.place-2, &.place-3
+        font-size: 36px
+        line-height: 36px
 
-      span
+      a
+        color: #4D4646
+        text-decoration: none
+        &:hover 
+          color: #AA8E8E
+
+      span.place-num
         display: inline-block
         width: 25px
         color: #CFCFCF
         
-      span
+      span.description
         display: inline-block
         width: 25px
         color: #CFCFCF
