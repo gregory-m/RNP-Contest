@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  def validate
+  def validate_on_create
     validate_url
   end
   
@@ -24,8 +24,11 @@ class User < ActiveRecord::Base
     if repo_url =~ /^git:\/\/github.com\/([A-Za-z0-9-]+)\/([A-Za-z0-9-]+).git$/
       self.nick  = $1
       self.repo_name = $2
+      if User.find_by_nick self.nick
+        errors.add(:repo_url, "We alrady have this user in system")
+      end
     else
-      errors.add(:url, "is not a guthub repository root")
+      errors.add(:repo_url, "is not a guthub repository root")
     end
   end
   

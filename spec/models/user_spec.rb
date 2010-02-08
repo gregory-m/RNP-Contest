@@ -16,9 +16,11 @@ describe User do
       }.should change{@user.reload.score}.from(0).to(0.983833718244804)
     end
     
-    it "should create user from GitHub URL" do
-      @user = User.create(:repo_url => "git://github.com/gregory-m/RNP-Contest-Bot.git")
+    it "should not create user with same nick" do
+      Factory(:user, :repo_url => "git://github.com/gregory-m/RNP-Contest-Bot.git")
       
+      @user = Factory.build(:user, :repo_url => "git://github.com/gregory-m/RNP-Contest-Bot2.git")
+      @user.should have(1).error_on(:repo_url)
     end
   end
   
