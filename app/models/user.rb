@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
     "public/code/#{nick}"
   end
   
+  def code
+    file = File.open "#{RAILS_ROOT}/#{code_path}/MyTronBot.rb", 'r'
+    file.read
+  end
   
   private
   def get_nick_and_repo_name_from_url

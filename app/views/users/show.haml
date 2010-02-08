@@ -1,1 +1,14 @@
-%h2= @user.nick
+%h2
+  = image_tag @user.gravatar_url :size => 32
+  = @user.nick
+  
+%p Побед: #{@user.wins}, поражений: #{@user.losses}, ничьи: #{@user.draws}
+
+%h3 Clone url
+
+%blockquote= @user.repo_url
+
+%h3 Код
+  
+%blockquote.code
+  %pre= @user.code
