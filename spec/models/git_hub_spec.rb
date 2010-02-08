@@ -14,7 +14,7 @@ describe GitHub do
     end
     
     it "should create directory for user's code" do
-      File.should_receive(:makedirs).with("#{RAILS_ROOT}/public/code/gregory-m")
+      FileUtils.should_receive(:mkdir_p).with("#{RAILS_ROOT}/public/code/gregory-m")
       GitHub.new(@user).download_code
     end
     
