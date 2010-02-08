@@ -7,5 +7,12 @@
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
   %body
-    %h1 Ruby NoName Podcat's Contest
-    = yield
+    #dark-side
+      = link_to "<h1>Ruby NoName Podcat's <strong>Contest</strong></h1>", page_path('home')
+      %ul
+        %li= link_to_unless_current '<span>Домой, к маме</span>', page_path('home')
+        %li= link_to_unless_current '<span>Участие</span>', new_user_path
+        %li= link_to_unless_current '<span>Правила</span>', page_path('rules')
+        %li= link_to_unless_current '<span>Приз</span>', page_path('yummy')
+    #content
+      = yield
