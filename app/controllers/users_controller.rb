@@ -28,11 +28,13 @@ class UsersController < ApplicationController
   end
   
   def update
-    user_nick = get_user_nick_from_json(params[:payload])
+    user_nick, user_email = get_user_nick_and_email_from_json(params[:payload])
+    
     @user = User.find_by_nick user_nick
     
     if @user
       GitHub.new(@user).download_code
+      upadate_user_email(@user, user_email) if @user.email.blank?
     end
     
     render :text => "OK"
@@ -43,9 +45,14 @@ class UsersController < ApplicationController
   end
 
   private
-  def get_user_nick_from_json(json)
+  def get_user_nick_and_email_from_json(json)
     push = JSON.parse(json)
-    push["repository"]["owner"]["name"]
+    [ push["repository"]["owner"]["name"], push["repository"]["owner"]["email"] ]
+  end
+  
+  def upadate_user_email(user, email)
+    @user.email = email
+    @user.save  
   end
 
 end
