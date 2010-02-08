@@ -1,0 +1,16 @@
+%h2 Участие 
+
+%p
+  Для участия вам необходимо указать clone URL вашего репо и
+  = link_to 'установить post-hook', page_path('hook')
+  для того что бы мы забирали самую свежую версию твоей змейки.
+
+%h3 GitHub clone URL
+
+%p Например:
+
+%blockquote git://github.com/gregory-m/RNP-Contest-Bot.git
+
+- form_for :user, @user, :url => { :action => "create" } do |f|
+  = f.text_field :repo_url, :class => 'url'
+  = submit_tag 'Yarrr'
