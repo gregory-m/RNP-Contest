@@ -6,7 +6,7 @@ class Tournament < ActiveRecord::Base
   end
   
   def before_create
-    @users = User.find(:all)
+    @users = User.find(:all, :conditions => {:active => true})
     @combuned_users = combine(@users)
     create_games(@combuned_users)
   end

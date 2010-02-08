@@ -10,6 +10,10 @@ class GitHub < Struct.new(:user)
       
       File.open("#{code_path}/MyTronBot.rb", "w") { |file|
         file.write(safe_code)
+        unless user.active?
+          user.active = true
+          user.save
+        end
       }
     }
   end

@@ -1,5 +1,6 @@
 Factory.define :user do |u|
   u.repo_url { Factory.next(:url) }
+  u.active true
 end
 
 Factory.sequence :url do |n|

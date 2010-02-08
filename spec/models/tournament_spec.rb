@@ -27,6 +27,18 @@ describe Tournament do
       @turnament.games.length.should == 6
     end
     
+    it "should not create games for not active users" do
+      @not_active_user = Factory(:user, :active => false)
+      @turnament = Tournament.create!
+
+      @players = []
+      @players << @turnament.games.map(&:player1)
+      @players << @turnament.games.map(&:player2)
+      
+      @players.flatten!
+      @players.should_not include(@not_active_user)
+    end
+    
     
   end
 
