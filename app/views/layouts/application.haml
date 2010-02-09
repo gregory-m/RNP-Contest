@@ -5,6 +5,18 @@
     %title RNP Contest ❖ Пиши код! @ Побеждай!
     %link{ :rel => 'shortcut icon', :href => '/images/rnp.ico', :type => 'image/x-icon' }
     = stylesheet_link_tag 'application'
+    
+    - if RAILS_ENV == 'production'
+      <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+      </script>
+      <script type="text/javascript">
+      try {
+      var pageTracker = _gat._getTracker("UA-12926065-1");
+      pageTracker._trackPageview();
+      } catch(err) {}</script>
+    
   %body
     #dark-side
       = link_to "<h1>Ruby NoName Podcast <strong>Contest</strong></h1>", page_path('home')
