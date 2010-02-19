@@ -7,8 +7,31 @@
   
   А еще, у нас есть пенальти, для игроков которые сыграли меньше 20 игр.
   
-  <br />
+  h3. Как начать?
   
+  Для тестирования ваших ботов вам понадобится Java SE 6.0 и выше. Ну и какой-нибудь ruby-интерпретатор, наверное :)
+  <blockquote>
+  $unzip ruby_starter_package.zip
+  $ cd ruby
+  $ java -jar engine/Tron.jar
+  </blockquote>  
+  Эта даст вам краткую справку о том, как запускать движок.
+  <br />
+  Совет: пока вы не написали ни единой строчки кода и не сломали своего бота, успейте хоть одним глазом взглянуть на то, как это должно выглядеть:
+  <blockquote>
+  $ java -jar engine/Tron.jar maps/empty-room.txt 'ruby ./MyTronBot.rb' 'java -jar ./example_bots/RandomBot.jar'
+  </blockquote>
+ 
+  
+  h3. Ошибка  : Exception in thread "main"
+  
+  Ошибка: 
+  <blockquote>Exception in thread "main" java.lang.UnsupportedClassVersionError: Bad version number in .class file</blockquote>
+  Причина : У вас Java SE версии 5.0 или ниже.
+  
+  
+  <br />
+   
   h3. А у меня есть еще вопрос.
   
   Задай его в "твитере":http://twitter.com/rubynoname и мы его добавим на эту страницу.
